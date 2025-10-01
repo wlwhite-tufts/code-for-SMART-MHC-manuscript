@@ -1,0 +1,39 @@
+IMPORTANT: jupyter notebooks and flag file need to be edited to match where you put your files. Any text <that looks like this> (starting with "<" and ending with ">") should be replaced with file path or directory information that matches the locations of your files.
+
+After hit6 had been idnetified by screening the hits selected in ../01_selected_hits for soluble expression in E. coli, this protocol was used to identify protease cleavage sites based on analysis of the observed masses of proteolytic fragments obtained by Ni-affinity purification from E. coli lysates.
+
+1. Identification of cut sites
+	We checked all possible subsequences of the expressed protein sequence for those that matched closely to the observed fragment masses and still contained the 6xHis tag. This analysis was performed with the ./find_cleavage_sites.ipynb notebook.
+
+2. Selection of sequence positions for redesign
+	Through manual examination of the design model (./hit6_model_with_CSM_design_info.pse), we identified positions near the cleavage sites that were deemed to be uninvolved in peptide binding or TCR recognition. For residues making up the beta sheet portion of the MHC structure we selected them only if their sidechain was pointed away from the peptide binding groove. Similarly, residues in the loops connecting beta strands or alpha helices were selcted only if they were far from the P14 TCR binding interface.
+	An annotated pymol session showing the selected sites is provided in ./hit6_model_with_CSM_design_info.pse
+
+3. MHC MSA curation and PSSM generation
+	******* need to get info from Chris *********
+	a. collect an MSA of MHC sequences
+	b. create PSSM files to use in design
+		these files are provided in ./pssms/*.pssm and could be re-used for any class I MHC
+
+4. PSSM-based redesign
+	Using the Amino acid distributions from the PSSM, we redesigned the sequence at the positions selected in step 2 in an effort to disrupt any potential protease recognition sites using commands such as to the following:
+
+	rosetta_scripts @./PSSM.flag -parser:script_vars pssm_weight=<weight> pssm_f=./pssms/cut_<cutoff>.pssm -out:suffix <cutoff>_<weight> -out:path <paht/to/output/folder> -nstruct 5
+
+	<weight> is either 0.2, 0.5, 0.8, 1, 1.5, or 2
+	<cutoff> is either 20, 25, 30, 35, or 40
+	<paht/to/output/folder> is the desired directory to store the outputs
+	Note: each combination of weight and cutoff produces 5 designs, for a total of 150 cleavage site redesigns
+
+	./PSSM.flag and the ./pssm_design.xml that it references are provided in this folder.
+
+5. Score and filter the cleavage site redesigns
+	The same metrics used to filter the library designs were used here to select the top cleavage site redesigns to test for reduced proteolysis.
+
+	a. Designs were scored with the following command:
+	rosetta_scripts @./score_only.flags -parser:protocol ./all_master_scores_separate.xml -in:file:silent <path/to/outputs/*.silent>
+	<path/to/outputs/*.silent> is the path to your output silent files from step 4
+
+	b. Designs were selected based on the Rosetta metrics calculated in step 5a using the ./analyze_cleavage_scores.ipynb notebook.
+	Note: in the 150 outputs from step 4, only 16 unique sequences were present, the copy of each unique sequence with the highest delta_sap_target was selected for further filtering
+	Note: filters were set such that exactly 12 designs passed all filters, generally resulting in the worst 1-2 sequences in each metric being removed

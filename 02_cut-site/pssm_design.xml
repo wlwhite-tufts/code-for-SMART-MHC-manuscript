@@ -1,0 +1,136 @@
+<ROSETTASCRIPTS>  
+  <SCOREFXNS>
+      <ScoreFunction name="sfxn_design" weights="beta_nov16">
+          <Reweight scoretype="res_type_constraint" weight="%%pssm_weight%%"/>
+          <Reweight scoretype="arg_cation_pi" weight="3"/>
+          <Reweight scoretype="approximate_buried_unsat_penalty" weight="5"/>
+          <Set approximate_buried_unsat_penalty_burial_atomic_depth="3.5"/>
+          <Set approximate_buried_unsat_penalty_hbond_energy_threshold="-0.5"/>
+          <Set approximate_buried_unsat_penalty_hbond_bonus_cross_chain="-5"/>
+          <Reweight scoretype="atom_pair_constraint" weight="0.3"/>
+          <Reweight scoretype="dihedral_constraint" weight="0.1"/>
+          <Reweight scoretype="angle_constraint" weight="0.1"/>
+          <Reweight scoretype="pro_close" weight="0"/>
+      </ScoreFunction>
+      
+      <ScoreFunction name="sfxn" weights="beta_nov16">
+          <Reweight scoretype="arg_cation_pi" weight="3"/>
+          <Reweight scoretype="pro_close" weight="0"/>
+      </ScoreFunction>
+      
+      <ScoreFunction name="pssm_score">
+          <Reweight scoretype="res_type_constraint" weight="1"/>
+      </ScoreFunction>
+      
+  </SCOREFXNS>
+  
+  <RESIDUE_SELECTORS>
+  	  <Chain name="binder" chains="A" />
+  	  <Chain name="MHC" chains="B" />
+                  
+      <ResidueName name="cys" residue_name3="CYS" />
+      <Not name="not_cys" selector="cys"/>
+
+      <Index name="MHC_near_cleavage" resnums="61,63,65,67,69,71,159,161,162,163,167,168,170"/>
+      <Neighborhood name="full_neighborhood" selector="MHC_near_cleavage" distance="8.0"/>
+
+      <And name="MHC_neighborhood" selectors="full_neighborhood,MHC"/>
+      <Not name="not_MHC_near_cleavage" selector="MHC_near_cleavage"/>
+      <And name="MHC_repack" selectors="MHC_neighborhood,not_MHC_near_cleavage"/>
+
+      <And name="binder_designable" selectors="full_neighborhood,binder"/>
+      <Or name="movable" selectors="full_neighborhood,MHC_near_cleavage"/>
+      <Not name="not_movable" selector="movable"/>
+      
+      
+  </RESIDUE_SELECTORS>
+  
+  <TASKOPERATIONS>
+
+
+      ### PSSM info ###
+      # The SeqprofConsensus taskop below named pssm_cutoff is what you want
+      # This can be called in a fastdesign mover as shown below
+
+      <SeqprofConsensus name="pssm_cutoff" filename="%%pssm_f%%" keep_native="1" min_aa_probability="0" convert_scores_to_probabilities="0" probability_larger_than_current="0" debug="1" ignore_pose_profile_length_mismatch="1" chain_num="0"/>
+
+      SeqprofConsensus name="energy_cutoff" filename="%%energy_f%%" keep_native="1" min_aa_probability="%%energyCut%%" convert_scores_to_probabilities="0" probability_larger_than_current="0" debug="1" ignore_pose_profile_length_mismatch="1"/>
+      
+      <RestrictAbsentCanonicalAAS name="noCys" keep_aas="ADEFGHIKLMNPQRSTVWY"/>
+      <PruneBuriedUnsats name="prune_buried_unsats" allow_even_trades="false" atomic_depth_cutoff="3.5" minimum_hbond_energy="-0.5" />
+      <LimitAromaChi2 name="limitchi2" chi2max="110" chi2min="70" include_trp="True" />
+      <ExtraRotamersGeneric name="ex1_ex2aro" ex1="1" ex2aro="1" ex2="0"/>
+      <IncludeCurrent name="ic"/>
+      
+      <OperateOnResidueSubset name="no_new_cys" selector="not_cys">
+          <RestrictAbsentCanonicalAASRLT aas="ADEFGHIKLMNPQRSTVWY"/>
+      </OperateOnResidueSubset>
+      
+      <OperateOnResidueSubset name="repack_near_muts" selector="MHC_repack"> 
+          <RestrictToRepackingRLT/>
+      </OperateOnResidueSubset>
+
+      <OperateOnResidueSubset name="preserve_far_res" selector="not_movable"> 
+          <PreventRepackingRLT/>
+      </OperateOnResidueSubset>
+      
+      <InitializeFromCommandline name="init"/>
+      
+  </TASKOPERATIONS>
+  
+  <MOVERS>
+      <FavorSequenceProfile name="FSP" scaling="none" weight="1" pssm="%%pssm_f%%" scorefxns="sfxn_design"/>
+      
+      <ClearConstraintsMover name="rm_csts" />
+      
+      <FastDesign name="fastDesign_stage2" scorefxn="sfxn_design" repeats="3" task_operations="no_new_cys,init,ex1_ex2aro,ic,limitchi2,pssm_cutoff,repack_near_muts,preserve_far_res" batch="false" ramp_down_constraints="false" cartesian="False" bondangle="false" bondlength="false" min_type="dfpmin_armijo_nonmonotone"> 
+          <MoveMap name="MM" bb="1" chi="1" jump="1"/>
+      </FastDesign>
+      
+      <SavePoseMover name="start_pose" restore_pose="0" reference_name="ref_start_pose"/>
+      
+      <AddConstraintsToCurrentConformationMover name="add_ca_csts" use_distance_cst="1" coord_dev="0.5" min_seq_sep="1" max_distance="9.0" cst_weight="1.0" CA_only="1" bb_only="0"/>
+  </MOVERS>
+  
+  <FILTERS>
+      
+      <ScoreType name="totalscore" scorefxn="sfxn" threshold="9999" confidence="1"/>
+      <ResidueCount name="nres" confidence="1" />
+      <CalculatorFilter name="score_per_res" confidence="1" equation="SCORE/NRES" threshold="999">
+          <Var name="SCORE" filter_name="totalscore" />
+          <Var name="NRES" filter_name="nres" />
+      </CalculatorFilter>
+      
+      <Geometry name="geom" count_bad_residues="true" confidence="0"/>
+                
+      <Time name="timed"/>
+  </FILTERS>
+  
+  <SIMPLE_METRICS>
+      <TotalEnergyMetric name="pre_pssm_score" scorefxn="pssm_score"/>
+      <TotalEnergyMetric name="post_pssm_score" scorefxn="pssm_score"/>
+      <SequenceRecoveryMetric name="seqrec_binder" reference_name="ref_start_pose" residue_selector="binder"/>
+      <SequenceRecoveryMetric name="seqrec_MHC" reference_name="ref_start_pose" residue_selector="MHC"/>
+      RMSDMetric name="rmsd" reference_name="ref_start_pose" robust="0" rmsd_type="rmsd_protein_bb_heavy" super="1" residue_selector="pocket_res"/>
+  </SIMPLE_METRICS>
+  
+<PROTOCOLS>
+     <Add filter="timed" />
+     Add filter="test_selection1"/>
+     <Add mover="start_pose"/>
+     <Add mover="add_ca_csts"/>
+     <Add mover="FSP"/>
+     <Add metrics="pre_pssm_score"/>
+     <Add mover="fastDesign_stage2"/>
+     <Add metrics="post_pssm_score"/>
+     <Add metrics="seqrec_binder"/>
+     <Add metrics="seqrec_MHC"/>
+     <Add mover="rm_csts"/>
+     Add metrics="rmsd"/>
+     <Add filter="score_per_res"/>
+     <Add filter="geom"/>
+     <Add filter="timed" />
+     
+</PROTOCOLS>
+
+</ROSETTASCRIPTS>
