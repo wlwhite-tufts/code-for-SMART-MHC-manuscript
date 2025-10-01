@@ -1,0 +1,14 @@
+Notes:
+
+This protocol was created to analyze the data produced when sequencing the naive and enriched libraries produced in the yeast display experiments described in the "Design of SMART MHCs" section of the paper. It takes raw read data, calculates enrichment scores, and merges this information with computationally derived scores to facilitate comparison of predicted and measured features.
+
+This protocol requires that a local version of BLAST be installed (https://www.ncbi.nlm.nih.gov/books/NBK569861/).
+
+Protocol:
+
+00. ngs_processing: calculate enrichment values from raw sequencing data
+	This step takes as input the raw paired end reads from an Illumina MiSeq, assembles the full-length sequences and calculates enrichmemnt scores for each observed sequence.
+01. check_Trp: identify designs containing a specific native-like contact
+	This step calculates an additional score which indicates whether or not each design had a Trp sidechain in a similar placement to W60 of B2m in the native H2Db structure (PDB: 1S7U). In this publication, this score was used to evaluate the efficacy of including native-like contacts and was not used for filtering. Future designs could instead be filtered by this metric since it proved to be strongly associated with success.
+02. filter: use the available information to select screening hits for further validation
+	This step combines computational metrics calculated during library design and in step 01 above with enrichment data to select the most promising designs to test for stabilization of H2Db in E. coli and cell-free expression systems.
