@@ -1,0 +1,37 @@
+Notes:
+
+This protocol was created to generate stabilizing scaffolds to support the folding of the a1+a2 domains of H-2Db, but can readily be modified to use any MHC allele. It relies hevily on the binder design protocol developed by Cao et all in 2022 (https://doi.org/10.1038/s41586-022-04654-9). Supplemental info from Cao et al. can be found at https://files.ipd.uw.edu/pub/robust_de_novo_design_minibinders_2021/supplemental_files/scripts_and_main_pdbs.tar.gz and is referenced throughout this document. This conmpressed directory contains a file (supplemental_files/cao_2021_protocol/cao_2021_protocol_guide.txt) which is referred to as "the Cao et al guide" throughtout the documents associated with this protocol.
+
+This document provides a high-level overview of each step in the protocol. More detailed instructions can be found in the README.txt files located in each sub-directory (numbered to match the steps below).
+
+This protocol also relies on five major software packages which must be intalled prior to running it.
+	Rosetta (https://docs.rosettacommons.org/docs/latest/Home)
+	PatchDock (https://bioinfo3d.cs.tau.ac.il/PatchDock/)
+	RIFdock (https://github.com/rifdock/rifdock/tree/master)
+	Silent Tools (https://github.com/bcov77/silent_tools)
+	DeepAccNet (https://github.com/hiranumn/DeepAccNet)
+
+In order to run the Rosetta scripts in this protocol two additional steps are needed:
+	Setup DAlphaBall with the following command:
+		cd <path/to/Rosetta>/main/source/external/DAlpahBall/; make
+	Download the fragment database: http://files.ipd.uw.edu/pub/modular_repeat_protein_2020/ss_grouped_vall_all.h5
+
+Protocol:
+
+00. prep: download and prepare the target
+	This step involves selecting the target MHC allele (we used H2Db) and preparing the structure for design, including removing the a1, a2, and B2m domains.
+01. RIFdock: create favorable docking oritntations against the target
+	This step is composed of three parts:
+		a. RIFgen: generate possible sidechain contacts with the target and infer possible backbone positions from them
+		b. PatchDock: find docking orientations for members of a scaffold library that create even contact with the target
+		c. RIFdock: search for orientations (starting from PatchDock positions) that allow many of the RIFgen backbone positions to be incorporated into a scaffold's structure
+02. fastdesign: design sequences with favorable interactions
+	This step takes the docked scaffolds from the previous step and uses the Rosetta's FastDesign protocol to design the scaffold to interact favorably with the target. Designs are scored and the top-ranking designs are carried forward to the next step.
+03. grafting: extract good motifs and graft them into other scaffolds
+	This step identifies short structural motifs in the designed scaffolds from the previous step and clusters them into groups. After selecting the groups with the most favorable interactions, each member of the scaffold library is searched for backbone structure matches to the selected motifs. Scaffolds with good matches are aligned to the motif and the motif is "grafted" into their structure to create an additinal set of docks. These docks are then designed using the same methods as in step 02.
+04. surface: design the exposed surface of the scaffolds to reduce hydrophobicity
+	This final design step is intended to reduce exposed hydrophobic patches and thereby prevent aggregation of the designed protein during expression and experimental characterization. It runs a similar FastDesign protocol, focusing on surface-exposed residues that do not interact with the target.
+05. filter: select the top designs to test experimentally
+	We calculate a series of metrics describing the quality of the interaction of each designed sequence with the target and select the top-scoring designs to screen experimentally.
+06. encoding
+	This step takes the selected designs and creates DNA sequences to encode each one in a DNA library. Sequence-scrambled controls for randommly selected designs are added at this step.

@@ -1,0 +1,8 @@
+-script_vars patchdock_res=8,10,12,23,25,94,96,98,117
+-jd2::failed_job_exception 0
+-beta_nov16
+-in:file:silent_struct_type binary
+-out:file:silent_struct_type binary
+-out:file:silent out.silent
+-dont_reinitialize_mover
+-mute protocols.rosetta_scripts.ParsedProtocol.REPORT

@@ -1,0 +1,11 @@
+-beta_nov16
+-in:file:silent_struct_type binary
+-out:file:silent_struct_type binary
+-mute protocols.rosetta_scripts.ParsedProtocol.REPORT
+-dunbrack_prob_buried 0.8
+-dunbrack_prob_nonburied 0.8
+-dunbrack_prob_buried_semi 0.8
+-dunbrack_prob_nonburied_semi 0.8
+-indexed_structure_store:fragment_store <path/to/your>/ss_grouped_vall_all.h5
+-holes:dalphaball <path/to/your/Rosetta>/main/source/external/DAlpahBall/DAlphaBall.gcc
+-script_vars patchdock_res=8,10,12,23,25,94,96,98,117
