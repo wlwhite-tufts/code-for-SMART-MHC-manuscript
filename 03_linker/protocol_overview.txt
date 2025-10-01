@@ -1,0 +1,55 @@
+IMPORTANT: jupyter notebooks, flag file, and pytohn script need to be edited to match where you put your files. Any text <that looks like this> (starting with "<" and ending with ">") should be replaced with file path or directory information that matches the locations of your files.
+
+This protocol begins with designs that rely on an unmodeled poly-GGS linker to connect the stabilzer to the MHC, and produces shorter, more structured linkers using deep neural networks to determine optimal backbone structure and sequence. Linker designs were evaulated using a combination of AlphaFold2 and Rosetta.
+
+Backbone design was performed using an in-painting model which is available here:
+https://github.com/RosettaCommons/RFDesign
+
+Sequence design was performed with proteinMPNN, which is available here:
+https://github.com/dauparas/ProteinMPNN
+
+ALphaFold2 predictions were run using a custom script similar to those provided here:
+https://github.com/nrbennet/dl_binder_design
+Following the setup instructions on this github page will allow use of the custom AlphaFold2 script below.
+
+1. Generate AlphaFold2 prediction for the starting design
+	Use the AlphaFold2 prediction script provided in dl_binder_design/af2_initial_guess/predict.py, provided with a template for the MHC region. This will be uses as a design model in subsequent steps.
+
+	python predict.py -pdbdir <path/to/CSM8_dir> -outpdbdir <path/to/output.pdb>
+	replacing <path/to/CSM8_dir> with a path to a folder containing only the CSM8 design model (../design_models/CSM8.pdb) and <path/to/output.pdb> with the desired output
+
+	The result of this is the pdb file ./CSM8_af2pred.pdb
+
+2. Generate in-painted linkers, using a command like the following:
+	python <path/to/inpaint.py> --pdb ./CSM8_af2pred.pdb --out <path/to/output_name> --contigs A1-57,9-19,B58-236 --num_designs 1 --dump_npz  --tmpl_conf <conf>
+
+	<path/to/inpaint.py> is the path to the inpainting/inpaint.py script downloaded from the RFDesign github repo listed above
+	<path/to/output_name> is the desired prefix for the output files
+	<conf> is a confidence value between 0 and 1
+	Commands can be generated with the ./make_inpainting_commands.ipynb notebook
+
+3. Select the top-scoring inpainted structures using the ./make_MPNN_commands.ipynb notebook
+
+4. Design sequences for each linker with proteinMPNN
+	a. use the ./make_MPNN_commands.ipynb notebook to generate the necessary JSON files and sbatch scripts
+	b. run each sbatch script
+
+5. Evaluate with AlphaFold2
+	a. use the ./make_AF2_commands.ipynb notebook to group the MPNN-generated sequences into batches and generate a list of commands
+	b. run the commands using the af2_binder_design conda environment provided in the https://github.com/nrbennet/dl_binder_design github repo
+	c. concatenate all output score files into one main score file
+	The resulting scores for our designs are stored in ./AF2_metrics_and_seqs.csv
+
+6. Evaluate with Rosetta
+	a. extract the AlphaFold outputs to pdb files with the following command:
+		mkdir <desired/path/to>/ppi_score_inputs; cd ppi_score_inputs; for j in <path/to/your>/AF2_outputs/*.silent; do silentextract $j; done
+		replace <desired/path/to>/ppi_score_inputs with the location where you want the extracted pdbs to go, and <path/to/your>/AF2_outputs/*.silent with the location of your alphafold outputs from the previous step
+	b. relabel the chains in the extracted pdbs with the following command:
+		for j in <path/to/your>/ppi_score_inputs/*.pdb; do python ./rechain_v.py -pdb $j -length 179; done
+		replace <path/to/your>/ppi_score_inputs/*.pdb with the path used in part a, above
+	c. use the ./make_ppi_score_cmds.ipynb notebook to generate commands to score the MPNN-generated designs with the ./all_master_scores_fused.xml Rosetta script
+	d. run the commands
+	The resulting scores for our designs are stored in ./ppi_scores.csv
+
+7. Select hits using the ./final_filtering.ipynb
+	the resulting designs for our run through this protocol are provided in ./selected_linkers.csv
