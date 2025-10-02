@@ -1,5 +1,10 @@
 IMPORTANT: jupyter notebooks and flag file need to be edited to match where you put your files. Any text <that looks like this> (starting with "<" and ending with ">") should be replaced with file path or directory information that matches the locations of your files.
 
+This protocol relies on two external packages that will need to be installed prior to following the steps below.
+HH-suite (https://github.com/soedinglab/hh-suite)
+PSI-BLAST, part of BLAST+ (https://www.ncbi.nlm.nih.gov/books/NBK569861/)
+You will also need to download a sequence database to search in. We used ******FILL THIS IN******* (LINK HERE)
+
 After hit6 had been idnetified by screening the hits selected in ../01_selected_hits for soluble expression in E. coli, this protocol was used to identify protease cleavage sites based on analysis of the observed masses of proteolytic fragments obtained by Ni-affinity purification from E. coli lysates.
 
 1. Identification of cut sites
