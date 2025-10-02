@@ -18,3 +18,7 @@ Several software packages (listed below) are necessary to run these protocols:
 - dl_binder_design (https://github.com/nrbennet/dl_binder_design)
 
 The `design_models` folder contains the computational design models for each of the three stabilizers discussed in the paper.
+
+The `figures` folder contains data and code that can be used to generate all the main and supplemental figures in the paper.
+Note that figure S6 is missing bacause it is based entirely on data in the PDB (code 9NDS).
+Some data files were too large to uplaod to GitHub, and will need to be downloaded from a separate public file server. Links to these files are provided in the relevant Jupyter notebooks.
