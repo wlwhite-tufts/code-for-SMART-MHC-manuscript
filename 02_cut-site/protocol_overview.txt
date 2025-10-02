@@ -10,8 +10,9 @@ After hit6 had been idnetified by screening the hits selected in ../01_selected_
 	An annotated pymol session showing the selected sites is provided in ./hit6_model_with_CSM_design_info.pse
 
 3. MHC MSA curation and PSSM generation
-	******* need to get info from Chris *********
-	a. collect an MSA of MHC sequences
+	a. collect an MSA of MHC sequences using a command like the following:
+		./make_msa.sh <path/to/your/sequence.fasta> <desired/path/to/output_dir> <num_cpus> <max_mem> '-d <path/to/your/database>'
+		where <path/to/your/sequence.fasta> is the path to the fasta file you want to find an MSA for, <desired/path/to/output_dir> is where you want to save the outputs, <num_cpus> and <max_mem> are the number of CPUs and memory allocated for the command, and <path/to/your/database> is the location of your database of sequences to search.
 	b. create PSSM files to use in design
 		these files are provided in ./pssms/*.pssm and could be re-used for any class I MHC
 
