@@ -12,6 +12,7 @@ Several software packages (listed below) are necessary to run these protocols:
 - Silent Tools (https://github.com/bcov77/silent_tools)
 - DeepAccNet (https://github.com/hiranumn/DeepAccNet)
 - BLAST (https://www.ncbi.nlm.nih.gov/books/NBK569861/)
+- HHSuite (https://github.com/soedinglab/hh-suite)
 - RFDesign (https://github.com/RosettaCommons/RFDesign)
 - proteinMPNN (https://github.com/dauparas/ProteinMPNN)
 - dl_binder_design (https://github.com/nrbennet/dl_binder_design)
