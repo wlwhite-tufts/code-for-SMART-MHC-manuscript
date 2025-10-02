@@ -1,0 +1,184 @@
+
+
+Software Version	3.14.03
+
+
+
+Experiment File Path:	Z:\Users\Baker_Lab\lgue26\FP\20250722_SMARTFP_redo.xpt
+Protocol File Path:	
+
+
+
+Plate Number	Plate 1
+Date	7/22/2025
+Time	10:40:46 AM
+Reader Type:	Synergy Neo2
+Reader Serial Number:	23062123
+Reading Type	Reader
+
+Procedure Details
+
+Plate Type	96 WELL PLATE (Use plate lid)
+Well Selection	Runtime
+Eject plate on completion	
+Read	Fluorescence Endpoint
+	Full Plate
+	Filter Set 1
+	    Excitation: 485/20,  Emission: 528/20
+	    Optics: Top,  Gain: AutoScale
+	Filter Set 2
+	    Excitation: 485/20,  Emission: 528/20
+	    Optics: Top,  Gain: Use first filter
+	Fluorescence Polarization
+	Light Source: Xenon Flash,  Lamp Energy: High,  Standard Dynamic Range
+	Read Speed: Normal,  Delay: 0 msec,  Measurements/Data Point: 100
+	Read Height: 5 mm
+
+
+
+Automatic gain values	 
+Gain(485/20,528/20 [Parallel])	132
+
+
+
+Actual Temperature:	23.0
+
+
+
+Actual Temperature:	23.0
+
+Results
+	1	2	3	4	5	6	7	8	9	10	11	12
+A	73218	67468	58478	60066	58393	57901	49485	52084	51300	55882	68042	49062	485/20,528/20 [Parallel]
+	44130	39854	34443	36612	36676	37366	31468	33791	33627	37371	47160	31835	485/20,528/20 [Perpendicular]
+	73218	67468	58478	60066	58393	57901	49485	52084	51300	55882	68042	49062	Parallel Intensity
+	44130	39854	34443	36612	36676	37366	31468	33791	33627	37371	47160	31835	Perpendicular Intensity
+	248	257	259	243	228	216	223	213	208	199	181	213	Polarization
+B	75986	69680	51022	61977	57383	51237	57806	56169	56093	55421	50687	56224	485/20,528/20 [Parallel]
+	45577	41937	29262	37374	36048	32836	38265	37384	37488	36872	33008	37471	485/20,528/20 [Perpendicular]
+	75986	69680	51022	61977	57383	51237	57806	56169	56093	55421	50687	56224	Parallel Intensity
+	45577	41937	29262	37374	36048	32836	38265	37384	37488	36872	33008	37471	Perpendicular Intensity
+	250	249	271	248	228	219	203	201	199	201	211	200	Polarization
+C	75520	70718	67190	59975	58278	57665	56086	55811	54677	53636	51041	56374	485/20,528/20 [Parallel]
+	45391	42449	39984	36301	37073	37721	37433	37754	36487	36104	34183	37914	485/20,528/20 [Perpendicular]
+	75520	70718	67190	59975	58278	57665	56086	55811	54677	53636	51041	56374	Parallel Intensity
+	45391	42449	39984	36301	37073	37721	37433	37754	36487	36104	34183	37914	Perpendicular Intensity
+	249	250	254	246	222	209	199	193	200	195	198	196	Polarization
+D	53743	56603	54523	49907	22379	23008	22602	22801	22285	22381	22038	21510	485/20,528/20 [Parallel]
+	35513	38378	36917	36466	7111	6983	6985	7170	6687	6999	6816	6981	485/20,528/20 [Perpendicular]
+	53743	56603	54523	49907	22379	23008	22602	22801	22285	22381	22038	21510	Parallel Intensity
+	35513	38378	36917	36466	7111	6983	6985	7170	6687	6999	6816	6981	Perpendicular Intensity
+	204	192	193	156	518	534	528	522	538	524	528	510	Polarization
+E	56910	54709	54916	49916	22617	22493	21940	21450	21962	21861	21437	21145	485/20,528/20 [Parallel]
+	38317	37369	37892	37021	7476	7162	6601	6765	6711	6879	6851	6756	485/20,528/20 [Perpendicular]
+	56910	54709	54916	49916	22617	22493	21940	21450	21962	21861	21437	21145	Parallel Intensity
+	38317	37369	37892	37021	7476	7162	6601	6765	6711	6879	6851	6756	Perpendicular Intensity
+	195	188	183	148	503	517	537	520	532	521	516	516	Polarization
+F	55722	54101	53963	48845	21728	21223	21229	21512	21481	21696	21359	21480	485/20,528/20 [Parallel]
+	38101	36831	37389	36550	7326	6798	6817	7059	6830	6874	6824	6832	485/20,528/20 [Perpendicular]
+	55722	54101	53963	48845	21728	21223	21229	21512	21481	21696	21359	21480	Parallel Intensity
+	38101	36831	37389	36550	7326	6798	6817	7059	6830	6874	6824	6832	Perpendicular Intensity
+	188	190	181	144	496	515	514	506	518	519	516	517	Polarization
+G													485/20,528/20 [Parallel]
+													485/20,528/20 [Perpendicular]
+	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	Parallel Intensity
+	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	Perpendicular Intensity
+	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	Polarization
+H													485/20,528/20 [Parallel]
+													485/20,528/20 [Perpendicular]
+	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	Parallel Intensity
+	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	Perpendicular Intensity
+	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	Polarization
+
+
+
+Software Version	3.14.03
+
+
+
+Experiment File Path:	Z:\Users\Baker_Lab\lgue26\FP\20250722_SMARTFP_redo.xpt
+Protocol File Path:	
+
+
+
+Plate Number	Plate 3
+Date	7/22/2025
+Time	11:03:28 AM
+Reader Type:	Synergy Neo2
+Reader Serial Number:	23062123
+Reading Type	Reader
+
+Procedure Details
+
+Plate Type	96 WELL PLATE (Use plate lid)
+Well Selection	Runtime
+Eject plate on completion	
+Read	Fluorescence Endpoint
+	Full Plate
+	Filter Set 1
+	    Excitation: 485/20,  Emission: 528/20
+	    Optics: Top,  Gain: AutoScale
+	Filter Set 2
+	    Excitation: 485/20,  Emission: 528/20
+	    Optics: Top,  Gain: Use first filter
+	Fluorescence Polarization
+	Light Source: Xenon Flash,  Lamp Energy: High,  Standard Dynamic Range
+	Read Speed: Normal,  Delay: 0 msec,  Measurements/Data Point: 100
+	Read Height: 5 mm
+
+
+
+Automatic gain values	 
+Gain(485/20,528/20 [Parallel])	132
+
+
+
+Actual Temperature:	23.1
+
+
+
+Actual Temperature:	23.1
+
+Results
+	1	2	3	4	5	6	7	8	9	10	11	12
+A	56327	59099	56961	57806	46537	60562	50625	54209	54574	50959	57460	52393	485/20,528/20 [Parallel]
+	37143	39651	37924	39073	30008	41846	33326	36389	36902	34097	41207	37233	485/20,528/20 [Perpendicular]
+	56327	59099	56961	57806	46537	60562	50625	54209	54574	50959	57460	52393	Parallel Intensity
+	37143	39651	37924	39073	30008	41846	33326	36389	36902	34097	41207	37233	Perpendicular Intensity
+	205	197	201	193	216	183	206	197	193	198	165	169	Polarization
+B	59843	59855	56155	55771	46263	59609	49382	57195	47157	52042	56691	50136	485/20,528/20 [Parallel]
+	39915	40425	37596	37649	29893	41017	32393	39052	31167	35572	40437	35668	485/20,528/20 [Perpendicular]
+	59843	59855	56155	55771	46263	59609	49382	57195	47157	52042	56691	50136	Parallel Intensity
+	39915	40425	37596	37649	29893	41017	32393	39052	31167	35572	40437	35668	Perpendicular Intensity
+	200	194	198	194	215	185	208	189	204	188	167	169	Polarization
+C	56185	53327	57093	56223	47149	62210	49783	58028	52225	52325	56266	48231	485/20,528/20 [Parallel]
+	37372	35585	38650	37940	30971	43100	33368	39997	34951	36183	39974	33497	485/20,528/20 [Perpendicular]
+	56185	53327	57093	56223	47149	62210	49783	58028	52225	52325	56266	48231	Parallel Intensity
+	37372	35585	38650	37940	30971	43100	33368	39997	34951	36183	39974	33497	Perpendicular Intensity
+	201	200	193	194	207	181	197	184	198	182	169	180	Polarization
+D	57539	53017	54535	42853	22783	22382	22301	22577	22223	22559	21585	22384	485/20,528/20 [Parallel]
+	38344	35159	36090	29858	6930	6778	6900	7059	6821	6797	6652	6935	485/20,528/20 [Perpendicular]
+	57539	53017	54535	42853	22783	22382	22301	22577	22223	22559	21585	22384	Parallel Intensity
+	38344	35159	36090	29858	6930	6778	6900	7059	6821	6797	6652	6935	Perpendicular Intensity
+	200	203	204	179	534	535	527	524	530	537	529	527	Polarization
+E	53248	52466	42429	41950	22873	21958	22363	21419	22067	21351	21248	21702	485/20,528/20 [Parallel]
+	35643	35582	27587	29260	7690	7184	7083	6937	6689	6716	6899	6871	485/20,528/20 [Perpendicular]
+	53248	52466	42429	41950	22873	21958	22363	21419	22067	21351	21248	21702	Parallel Intensity
+	35643	35582	27587	29260	7690	7184	7083	6937	6689	6716	6899	6871	Perpendicular Intensity
+	198	192	212	178	497	507	519	511	535	521	510	519	Polarization
+F	51450	48163	39259	40600	22750	21956	22318	21939	21469	21659	21623	22040	485/20,528/20 [Parallel]
+	35891	34490	27194	28802	7809	7085	7186	7172	6967	6663	6986	7134	485/20,528/20 [Perpendicular]
+	51450	48163	39259	40600	22750	21956	22318	21939	21469	21659	21623	22040	Parallel Intensity
+	35891	34490	27194	28802	7809	7085	7186	7172	6967	6663	6986	7134	Perpendicular Intensity
+	178	165	182	170	489	512	513	507	510	529	512	511	Polarization
+G													485/20,528/20 [Parallel]
+													485/20,528/20 [Perpendicular]
+	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	Parallel Intensity
+	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	Perpendicular Intensity
+	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	Polarization
+H													485/20,528/20 [Parallel]
+													485/20,528/20 [Perpendicular]
+	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	Parallel Intensity
+	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	Perpendicular Intensity
+	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	?????	Polarization
+
