@@ -1,4 +1,4 @@
-IMPORTANT: jupyter notebooks and flag file need to be edited to match where you put your files. Any text <that looks like this> (starting with "<" and ending with ">") should be replaced with file path or directory information that matches the locations of your files.
+IMPORTANT: jupyter notebooks, python script, bash script, and flag file need to be edited to match where you put your files. Any text <that looks like this> (starting with "<" and ending with ">") should be replaced with file path or directory information that matches the locations of your files.
 
 This protocol relies on two external packages that will need to be installed prior to following the steps below.
 HH-suite (https://github.com/soedinglab/hh-suite)
