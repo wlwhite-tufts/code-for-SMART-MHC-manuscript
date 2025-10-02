@@ -18,8 +18,10 @@ After hit6 had been idnetified by screening the hits selected in ../01_selected_
 	a. collect an MSA of MHC sequences using a command like the following:
 		./make_msa.sh <path/to/your/sequence.fasta> <desired/path/to/output_dir> <num_cpus> <max_mem> '-d <path/to/your/database>'
 		where <path/to/your/sequence.fasta> is the path to the fasta file you want to find an MSA for, <desired/path/to/output_dir> is where you want to save the outputs, <num_cpus> and <max_mem> are the number of CPUs and memory allocated for the command, and <path/to/your/database> is the location of your database of sequences to search.
-	b. create PSSM files to use in design
-		these files are provided in ./pssms/*.pssm and could be re-used for any class I MHC
+	b. create PSSM files to use in design using a command like the lone below.
+		python msa2clean_pssm_v3.py --in_fasta <path/to/your/msa_output.fasta> --in_a3m <path/to/your/msa_output.a3m> --pdb <path/to/your/design_model.pdb> --out_pssm <desired/path/to/pssm.pssm> --win_size **FILL IN** --filter_mode **FILL IN** --query_seq_min_id <min_id>
+		where <path/to/your/msa_output.fasta> and <path/to/your/msa_output.a3m> are the locations of your MSA outputs in fasta or a3m format, respectively, <path/to/your/design_model.pdb> is the PDB file for the structure you will be modifying (../design_models/hit6.pdb for us), <desired/path/to/pssm.pssm> is the desired output location for the PSSM file, and <min_id> is the minimum sequence identity to use when generating the PSSM. We tried values of 20%, 25%, 30%, 35%, and 40% and made designs based on all of them.
+		the resulting PSSM files are provided in ./pssms/*.pssm and could be re-used for any class I MHC
 
 4. PSSM-based redesign
 	Using the Amino acid distributions from the PSSM, we redesigned the sequence at the positions selected in step 2 in an effort to disrupt any potential protease recognition sites using commands such as to the following:
