@@ -38,7 +38,7 @@ Following the setup instructions on this github page will allow use of the custo
 	a. use the ./make_AF2_commands.ipynb notebook to group the MPNN-generated sequences into batches and generate a list of commands
 	b. run the commands using the af2_binder_design conda environment provided in the https://github.com/nrbennet/dl_binder_design github repo
 	c. concatenate all output score files into one main score file
-	The resulting scores for our designs are stored in ./AF2_metrics_and_seqs.csv
+	The resulting scores for our designs can be downloaded at https://files.ipd.uw.edu/pub/SMART_MHC_2025/03_linker-AF2_metrics_and_seqs.csv
 
 6. Evaluate with Rosetta
 	a. extract the AlphaFold outputs to pdb files with the following command:
@@ -49,7 +49,7 @@ Following the setup instructions on this github page will allow use of the custo
 		replace <path/to/your>/ppi_score_inputs/*.pdb with the path used in part a, above
 	c. use the ./make_ppi_score_cmds.ipynb notebook to generate commands to score the MPNN-generated designs with the ./all_master_scores_fused.xml Rosetta script
 	d. run the commands
-	The resulting scores for our designs are stored in ./ppi_scores.csv
+	The resulting scores for our designs can be downloaded at https://files.ipd.uw.edu/pub/SMART_MHC_2025/03_linker-ppi_scores.csv
 
 7. Select hits using the ./final_filtering.ipynb
 	the resulting designs for our run through this protocol are provided in ./selected_linkers.csv
