@@ -11,10 +11,11 @@ This protocol also relies on five major software packages which must be intalled
 	Silent Tools (https://github.com/bcov77/silent_tools)
 	DeepAccNet (https://github.com/hiranumn/DeepAccNet)
 
-In order to run the Rosetta scripts in this protocol two additional steps are needed:
+In order to run the Rosetta scripts in this protocol three additional steps are needed:
 	Setup DAlphaBall with the following command:
 		cd <path/to/Rosetta>/main/source/external/DAlpahBall/; make
 	Download the fragment database: http://files.ipd.uw.edu/pub/modular_repeat_protein_2020/ss_grouped_vall_all.h5
+	Download the transforms file: https://files.ipd.uw.edu/pub/SMART_MHC_2025/xform_pos_ang10_0.35A_1.1d.x
 
 Protocol:
 
