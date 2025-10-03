@@ -12,7 +12,7 @@ IMPORTANT: jupyter notebook needs to be edited to match where you put your files
 	Note: the python script is located in ./fastq_gz_assembly.py, and required a file containing the sequences of the sequencing primers (./pETCON_adapters.fasta)
 
 2. Merge data across all sequencing samples
-	Use the ./combine_counts.ipynb notebook to read in the csvs created above and create a data table where each row represents an observed sequence, and each column represents a sample, with entries representing the number of times a sequence was observed in a sample. The result of this tabulation for our experiments is ./all_counts.csv
+	Use the ./combine_counts.ipynb notebook to read in the csvs created above and create a data table where each row represents an observed sequence, and each column represents a sample, with entries representing the number of times a sequence was observed in a sample. The result of this tabulation for our experiments can be downloaded at https://files.ipd.uw.edu/pub/SMART_MHC_2025/01_select_hits-00_ngs_processing-all_counts.csv
 	Note: this notebook also creates a fasta file with all observed sequences that is used in the next step.
 
 3. Create a BLAST database from the sequences of the design library (to query assembled sequences against)
@@ -31,4 +31,4 @@ IMPORTANT: jupyter notebook needs to be edited to match where you put your files
 	python find_sequencing_matches.py <path/to/batch.fasta> <path/to/db> <path/to/output.csv>
 	replacing <path/to/batch.fasta> with the location of the batch fasta file, <path/to/db> with the same database prefix as you used above, and <path/to/output.csv> with the desired output file name
 
-	c. concatenate all the resulting batch outputs into a large csv. The result of this for our dataset was ./all_matches.csv
+	c. concatenate all the resulting batch outputs into a large csv. The result of this for our dataset can be downloaded at https://files.ipd.uw.edu/pub/SMART_MHC_2025/01_select_hits-00_ngs_processing-all_matches.csv
