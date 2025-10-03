@@ -15,4 +15,4 @@ IMPORTANT: flag files and jupyter notebook need to be edited to match where you 
 	Use the ./rifdock.flag file rather than the one in ../../00_library/01_RIFdock
 
 4. Collect the dok scores and save them in one large csv file using the ./collect_trp_info.ipynb notebook
-	The result of this is ./near_perfect_matches_with_rif_scores.csv
+	The result of this can be downloaded at https://files.ipd.uw.edu/pub/SMART_MHC_2025/01_select_hits-01_ckeck_Trp-near_perfect_matches_with_rif_scores.csv
